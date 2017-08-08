@@ -6,4 +6,12 @@ The Sketch UI is a user interface for drawing sketch maps while the sketch maker
 
 # How to use
 
-Check README in each package
+In a nutshell:
+
+* compile both package in a folder named release
+* from release folder of each package launch `expert_ui` and `main`
+
+Now you can draw in the UI and the result of the matching with the model will be exported to the folde rnamed `results`.
+To change the model, just change the image in the model folder.
+
+There is more detailled READMEs in each package.
