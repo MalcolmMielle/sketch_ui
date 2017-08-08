@@ -57,11 +57,11 @@ int main(int argc, char** argv)
 	
 // 	m.importFile2System();
 	AASS::graphmatch::GraphMatcherNeighbor gm;
-	AASS::SketchComparator model(m, mm, &gm, "../result");
+	AASS::SketchComparator model(m, mm, &gm, "../../result");
 	
-	model.setInputPath("../input");
-	model.setModelPath("../model");
-	model.setPath2SaveResult("../result");
+	model.setInputPath("../../export");
+	model.setModelPath("../../model");
+	model.setPath2SaveResult("../../results");
 	
 	while(true){
 		model.importFile2System();

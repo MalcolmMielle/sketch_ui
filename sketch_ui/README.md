@@ -2,6 +2,8 @@
 
 An simple interface for sketching maps.
 
+Use the program `mapmakerv3`
+
 Using Qt4, a user can either :
 
 * Draw obstacles 

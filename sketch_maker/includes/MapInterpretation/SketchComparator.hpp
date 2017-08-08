@@ -77,7 +77,7 @@ namespace AASS{
 		const std::string& getPath2SaveResult(){ return _path_to_save_result;}
 		
 		void exportResult(){
-			cv::imwrite(_path_to_save_result + "result.jpg", _result);
+			cv::imwrite(_path_to_save_result + "/result.jpg", _result);
 		 	
 		}
 		

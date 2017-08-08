@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 	    cols = 500;
     }
     
-    AASS::MapMakerExpert mapmakerv3(cols, rows, "./");
+    AASS::MapMakerExpert mapmakerv3(cols, rows, "../../export");
     mapmakerv3.show();
 	
     mapmakerv3.setImage();
