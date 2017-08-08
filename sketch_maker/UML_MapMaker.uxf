@@ -1,0 +1,1223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>15</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1035</x>
+      <y>2190</y>
+      <w>510</w>
+      <h>915</h>
+    </coordinates>
+    <panel_attributes>MapMakerv3
+--
+#_full_window : QVBoxLayout *
+#_grid : QGridLayout *
+#_down_grid : QGridLayout *
+#_image : ImageLabel *
+#_obstacle : QPushButton *
+#_path : QPushButton *
+#_robot : QPushButton *
+#_quit :  QPushButton *
+#_mode :  QPushButton *
+#_reset :  QPushButton *
+#_export :  QPushButton *
+#_slider_1 : QSlider *
+#_slider_2 :  : QSlider *
+#_slider_dilate :  : QSlider *
+#_spinbox_downSample : QSpinBox *
+#_spinbox_level : QSpinBox *
+#_m_lcd : QLCDNumber *
+#_label_downSample : QLabel *
+#_label_dilateErode : QLabel *
+#_label_threshold : QLabel *
+#_label_sharpness : QLabel *
+#_zoneCentrale : QWidget *
+--
++MapMakerv3(m : const Map&amp;)
++setImage() : void
++change2Obstacle() : void
++change2Path() : void
++change2Robot() : void
++changeMode() : void
++reset() : void
++Sysexport() : void
++sharpen(s : int) : void
++tresh(t : int) : void
++dilat(d : int) : void
++downSamp(d : int) : void
++level(d : int) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1035</x>
+      <y>3165</y>
+      <w>600</w>
+      <h>555</h>
+    </coordinates>
+    <panel_attributes>ImageLabel
+--
+#_flag_obstacle : bool
+#_flag_path : bool
+#_flag_robot : bool
+#left_press : bool
+#_map : Map
+#_x_mouse : int
+#_y_mouse : int
+--
++ImageLabel(m : const Map&amp;)
++~ImageLabel()
++getMap() : const Map&amp;
++getMap() : Map&amp;
++setFlagObstacle() : void
++setFlagPath() : void
++setFlagRobot() : void
++mouseMoveEvent(event : QMouseEvent *) : void
++mouseReleaseEvent(event : QMouseEvent *) : void
++mousePressEvent(ev : QMouseEvent *);
++printImage() : void
+-draw(first_click : bool) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1305</x>
+      <y>3090</y>
+      <w>45</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1740</x>
+      <y>2385</y>
+      <w>930</w>
+      <h>1515</h>
+    </coordinates>
+    <panel_attributes>Map
+--
+#_rows : int
+#_cols : int
+#_previous_point : cv::Point2f
+#_list_obstacle : std::vector&lt;int&gt;
+#_list_path : std::vector&lt;int&gt;
+#_list_robot : std::vector&lt;Robot&gt;
+#_map : cv::Mat
+#_obstacle_map : cv::Mat
+#_path_map : cv::Mat
+#_result : cv::Mat
+#_obstacle_color : cv::Scalar
+#_path_color : cv::Scalar
+#_think : Thinker*
+#_makerLandmarks : MakerLandmarks*
+#_line_follower : topologicalmap::LineFollower
+--
++Map(t : Thinker&amp;, m : MakerLandmarks&amp;)
++Map(width : int, height : int, t : Thinker&amp;, m : MakerLandmarks&amp;)
+
++setMap(path_to_map : const std::string&amp;) : void
++setMap(map : const Map&amp;) : void
++setObstacleColor(color : const cv::Scalar&amp;) : void
++setPathColor(color : const cv::Scalar&amp;) : void
++addObstacle(x : int, y : int, first_click : bool) : void
++addPath(x : int, y : int, first_click : bool) : void
++addRobot(x :int, y : int) : void
++getMap() : cv::Mat&amp;
++getMap() : const cv::Mat&amp;
++getObstacleMat() : cv::Mat&amp;
++getObstacleMat() : const cv::Mat&amp;
++getPathMat() : cv::Mat&amp;
++getPathMat() : const cv::Mat&amp;
++getResult() : cv::Mat&amp;
++getResult() : const cv::Mat&amp;
++getRobots() : std::vector&lt;int&gt;&amp;
++getRobots() : const std::vector&lt;int&gt;&amp;
++getObstacles() : std::vector&lt;int&gt;&amp;
++getObstacles() : const std::vector&lt;int&gt;&amp;
++getPath() : std::vector&lt;int&gt;&amp;
++getPath( : const std::vector&lt;int&gt;&amp;
++getMakerLandmarks() : const MakerLandmarks*
++getMakerLandmarks() : MakerLandmarks*
++getLandmarks() : const std::vector&lt;cv::Point2f&gt;&amp;
++getLandmarks() : std::vector&lt;cv::Point2f&gt;&amp;
++getThinker() : const Thinker*
++getThinker() : Thinker*
++setDownSample( d : int) : void
++reset() : void
++think() : void
+
++exportSystem2Fil() : void
++importFile2System() : void
+ 
+-drawObstacle(x : int, y : int, first_click : bool) : void
+-drawPath(x : int, y : int, first_click : bool) : void
+-drawRobot(r : const Robot&amp;) : void
+-save_vector(src: const std::vector&lt;int&gt;&amp;, file : const std::string&amp;) : void
+-save_vector(src: const std::vector&lt;Robot&gt;&amp;, file : const std::string&amp;) : void
+-import_vector(target : const std::vector&lt;int&gt;&amp;, file : const std::string&amp;) : void
+-import_vector(target : const std::vector&lt;Robot&gt;&amp;, file : const std::string&amp;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1620</x>
+      <y>3330</y>
+      <w>150</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2910</x>
+      <y>2505</y>
+      <w>435</w>
+      <h>660</h>
+    </coordinates>
+    <panel_attributes>/Thinker/
+--
+#_map_in : cv::Mat
+#_map_result : cv::Mat
+#_mode : int
+#_threshold_local_max : int
+#_sharpner : float
+#_dilate : int
+--
++Thinker()
++getMapIn() : const cv::Mat&amp;
++getResult() : const cv::Mat&amp;
++getMode() : int
++setMode(m : int) : void
++setThresholdLocalMax(t : int) : void
++getThresholdLocalMax() : int
++setSharpner(s : int) : void
++getSharpner() : int
++setDilate(d : int) : void
++getDilate() : int
++getDownSample() : int
++setDownSample(d : int) : void
+
++reset( : void
++dilateErode(m : cv::Mat&amp;) : void
+ 
+/+think(mat_in : const cv::Mat&amp;)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2655</x>
+      <y>2745</y>
+      <w>285</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3555</x>
+      <y>2460</y>
+      <w>780</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes>Thinker_Voronoi
+--
+#_voronoi : cv::Mat
+#_label : cv::Mat
+--
++Thinker_Voronoi()
++Voronoi() : void
++print() : void
++think(mat_in : const cv::Mat&amp;) : void
++reset() : void
++modePartialNormalized() : void
++modeSobelLabel() : void
++modeLaplaceLabel() : void
++modeCannyVoro() : void
++modeLaplaceVoro() : void
++modeLocalMaxima() : void
++modeLocalMaximaBest() : void
++modeLocalMaximaCombo() : void
++modeDelaunay() : void
+ 
+-voronoi() : void
+-voronoiSobelVoro() : void
+-voronoiCannyVoro() : void
+-voronoiLaplaceLabel() : void
+-delaunay(obst : const std::vector&lt;cv::Point2f&gt;&amp; ) : void
+-localMaxima() : void
+-localMaximaBest() : void
+-localMaximaCombo() : void
+-partialNormalize(cv::Mat&amp; mat_in) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3330</x>
+      <y>2715</y>
+      <w>255</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>735</x>
+      <y>2805</y>
+      <w>90</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Actor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
+      <y>2850</y>
+      <w>255</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2910</x>
+      <y>3315</y>
+      <w>570</w>
+      <h>375</h>
+    </coordinates>
+    <panel_attributes>/MakerLandmarks/
+--
+#_map_in : cv::Mat
+#_map_result : cv::Mat
+--
++MakerLandmarks()
+/+getLandmarks(map : const cv::Map&amp;) : void/
++getresult() : const cv::Mat&amp;
++getMapIn() : vonst cv::Mat&amp;
++getLandmarks() : const std::vector&lt;cv::Point2f&gt;&amp;
++getLandmarks() : std::vector&lt;cv::Point2f&gt;&amp;
++setMode(m : int) : void
++setDownSample(d : int) : void
++upSample() : void
++drawLandmarks(map_in : cv::Mat) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2655</x>
+      <y>3420</y>
+      <w>285</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3645</x>
+      <y>3315</y>
+      <w>645</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>MakerBasic
+--
+#_kernel : cv::Mat
+--
++MakerBasic()
++makeLandmarks() : void
+ 
+-landmarksFromDelaunay(map_in : const Map&amp;) : void
+-landmarksFromGFTT() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3465</x>
+      <y>3420</y>
+      <w>210</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1800</x>
+      <y>3990</y>
+      <w>1050</w>
+      <h>1035</h>
+    </coordinates>
+    <panel_attributes>LineFollower
+--
+#_map_in : cv::Mat
+#_map_result : cv::Mat
+#_LP : cv::Point2i
+#_RP : cv::Point2i
+#_LLP : cv::Point2i
+#_LRP : cv::Point2i
+#_W : cv::Mat
+#_d : int
+#_last_drawing_point :cv::Point2i
+#_postprocessing : PostProcessingGraph
+#_value_of_white_min : int
+#_marge :int
+#_graph : GraphList
+--
++LineFollower()
++~LineFollower() : void
++addPoint2Explore(const std::vector&lt; cv::Point2i &gt;&amp; all_points, const Vertex&amp; loop): void
++calculateDistance(std::vector&lt; cv::Point2i &gt;&amp; all_points) : void
++drawGraph(mat : cv::Mat&amp;) : void
++drawLine() : void
++findNextLPRP(all_points : std::vector&lt;cv::Point2i&gt;) : void
++getDynamicWindow() : cv::Mat&amp;
++getGraph() : GraphList
++getLP() : cv::Point2i&amp;
++getRP() : cv::Point2i&amp;
++getResult() : cv::Mat&amp;
++init() : void
++inputMap(m : const cv::Mat&amp;) : void
++lineThinningAlgo(index_dad : Vertex) : void
++moveForward() : void
++printGraph() : void
++printIntersection(): void
++removeLineSegment(m : cv::Mat&amp;) : void
++reset() : void
++setD(d : int) : void
++setDynamicWindow(d : cv::Mat&amp;) : void
++setMarge(m: int) : void 
++setMinValueWhite(v : int) : void
++thin() : void
++typeOfIntersection(m : cv::Mat&amp;) : int
++upResize() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1260</x>
+      <y>4350</y>
+      <w>375</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>Intersection_Graph
+--
+type : std::string
+mat : cv::Mat
+point : cv::Point2i
+index : int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>4530</y>
+      <w>45</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2325</x>
+      <y>3885</y>
+      <w>45</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>4605</y>
+      <w>1185</w>
+      <h>795</h>
+    </coordinates>
+    <panel_attributes>GraphList
+--
+#_marge : int
+#_graph : Graph_boost
+--
++GraphList()
++addEdge(loop_index : Vertex, index :Vertex) : void
++addVertex(type : std::string&amp;, m : cv::Mat&amp;, p : cv::Point2i, vertex_out : Vertex&amp;, dad : const Vertex&amp;) : void
++addVertex(type : std::string&amp;, m : cv::Mat&amp;, p : cv::Point2i, vertex_out : Vertex&amp;) : void
++clear() : void
++distanceSquared(v : const Vertex&amp;, v2 : const Vertex&amp;) : float
++draw(v : const Vertex&amp;, m : cv::Mat&amp;) const : void
++draw(m : cv::Mat&amp;) const : void
++fuse(v : Vertex&amp;, v_to_remove : Vertex) :  void
++getAllEdgeLinked(v : const Vertex&amp;, all_edge : deque &lt; pair &lt; Edge, Vertex &gt; &gt;&amp;) : void
++getAllVertexLinked(v : const Vertex&amp;, all_vertex : deque &lt; Vertex &gt;&amp;) : void
++getGraph() : GraphList
++getNumEdges(v : Vertex) const : int
++getNumEdges() : int
++getNumVertices() const : int
++getPoint(v : const Vertex&amp;, p : cv::Point&amp;) : void
++loopDetection(p : const cv::Point2i, dad : const Vertex&amp;, vertex_out : Vertex&amp;) : bool
++operator[](v : const Vertex&amp;) const : const Intersection_Graph&amp;
++operator[](v : const Vertex&amp;) : Intersection_Graph&amp;
++print() : void
++print(v : const Vertex&amp;) const : void
++removeVertex(v : Vertex&amp;) : void
++scale(scale : double) : void
++setMarge(m : int) : int
++setPoint(v : Vertex&amp;, p : cv::Point&amp; p) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1650</x>
+      <y>4680</y>
+      <w>180</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2955</x>
+      <y>3720</y>
+      <w>1200</w>
+      <h>825</h>
+    </coordinates>
+    <panel_attributes>PlaceExtractor
+--
+#_map_in : cv::Mat
+#_map_result :cv::Mat
+#_graph : GraphPlaces
+#_previous_info : GraphList
+#_use_previous_info : bool
+--
++PlaceExtractor()
++draw() : void
++drawCircle(m : cv::Mat&amp;) : void
++drawGraph(m . cv::Mat&amp;) : void
++extract() : void
++getGraph() : const GraphPlace&amp;
++getMode() : int
++getModeName() : string
++getResult() const : const cv::Mat&amp;
++init() : void
++inputDistance(m : const cv::Mat6) : void
++inputGraph(g : const GraphList&amp;) : void
++inputMapIn(m : const cv::Mat&amp;) : void
++isCorner(v : const Vertex&amp;) const : void
++isDeadEnd(v : const Vertex&amp;) const : void
++makeGraphV2() : void
++nextMode() : void
++noObstacle(graph : const GraphList&amp;, v : const Vertex&amp;, v_to_remove : const Vertex&amp;) : void
++printGraph() : void
++prunePreviousGraph() : void
++prunePreviousGraphDistance(graph : GraphList&amp;, v : Vertex&amp;, v2 : Vertex&amp;) : void
++prunePreviousGraphNoObstacle(graph : GraphList&amp;, v : Vertex&amp;, v2 : Vertex&amp;) : void
++prunePreviousGraphVoronoi(graph : GraphList&amp;, v : Vertex&amp;, v2 : Vertex&amp;) : void
++reset() : void
++setMode(i : int) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5205</x>
+      <y>4320</y>
+      <w>705</w>
+      <h>255</h>
+    </coordinates>
+    <panel_attributes>Gateway
+--
+#gateway : std::pair &lt; cv::Point2i, cv::Point2i &gt;
+--
++Gateway()
++getGateway() : const std::pair &lt; cv::Point2i, cv::Point2i &gt;&amp;
++setFirst(const cv::Point2i&amp; p) : void
++setSecond(const cv::point2i&amp; p ) : void
++setGateway(const pair : std::pair &lt; cv::Point2i, cv::Point2i &gt;&amp;) : void
++setGateway(p : const cv::Point2i&amp;, pp : const cv::Point2i pp) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5205</x>
+      <y>4665</y>
+      <w>510</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Place
+--
+#_place : std::deque&lt;topologicalmap::Gateway&gt;
+--
++Place()
++addGateway(g : const topologicalmap::Gateway&amp;) : void
++getgateway() const : const std::deque&lt;topologicalmap::Gateway&gt;&amp;
++size() : int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5295</x>
+      <y>4560</y>
+      <w>45</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5715</x>
+      <y>3060</y>
+      <w>255</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Gateway_struct
+--
++label : bool
++gateways : Gateway
+--
++Gateway_struct()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2655</x>
+      <y>3750</y>
+      <w>330</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0;90.0;140.0;200.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2880</x>
+      <y>4650</y>
+      <w>2295</w>
+      <h>1155</h>
+    </coordinates>
+    <panel_attributes>GraphPLace
+--
+#_marge : int
+#_graph : Graph_places
+--
++GraphPlace()
++addCrossing(v : VertexPlace&amp;, int : const Vertex&amp;, inter : const Intersection_Graph&amp;)
++addEdge(loop_index : Vertex, index :Vertex) : void
++addVertex(vertex_out : VertexPlace&amp;, dad : const Vertex&amp;, contour : const vector &lt; cv::Point &gt;&amp;, mom : const cv::Moments&amp;, center_mass : const cv::Point&amp;) : void
++addVertex(vertex_out : VertexPlace&amp;, place : const Place&amp;) : void
++addVertex(vertex_out : VertexPlace&amp;, contour : const vector &lt; cv::Point &gt;&amp;, mom : const cv::Moments&amp;, center_mass : const cv::Point&amp;) : void
++angle(center : const VertexPlace&amp;, v1 : const VertexPlace&amp;, v2 : const VertexPlace) : double
++clear() : void
++draw(m :cv::Mat&amp;, v : const VertexPlace, color : const Scalar&amp;) const : void
++draw(m : cv::Mat&amp;) const : void
++drawSpecial(m :cv::Mat&amp;, v : const VertexPlace, color : const Scalar&amp;) const : void
++drawSpecial(m : cv::Mat&amp;) const : void
++editDistance(v : const VertexPlace&amp;, other_graph_neighbor : const string&amp;, all_edge_other_graph : const deque &lt; pair &lt; EdgePlace, VertexPlace &gt; &gt;&amp;, out : deque &lt; Match &gt;&amp;, operation_out : string&amp;) const : int
++getAllEdgeLinked(v : const VertexPlace&amp;, all_vedges : deque &lt; pair &lt;VertexPlace , EdgePLace &gt; &gt; &amp;) : void
++getAllEdgeLinkedCounterClockWise(v : const VertexPlace&amp;, all_vedges : deque &lt; pair &lt;VertexPlace , EdgePLace &gt; &gt; &amp;) : void
++getAllVertexLinked(v : const VertexPlace&amp;, all_vertex : deque &lt; VertexPlace &gt; &amp;) : void
++getGraph() : GraphPlace
++getGraph() const : const GraphPlace&amp;
++getMarge() : int
++getMarge() const : int
++getNumEdges() const : int
++getNumEdges(v : const VertexPlace&amp;) : int
++getNumVertices() const : int
++getTarget(egde : const EdgePlace&amp;, out : VertexPlace&amp;) const : void
++isRoom(v : const VertexPlace&amp;) const : bool
++labelAll(h :const deque &lt; VertexPlace&gt;&amp;) : void
++makeCompleteGraph(gp : GraphPlace&amp;) : void
++makeString(all_edge : const deque &lt; pair &lt; EdgePlace, VertexPlace &gt; &gt;&amp;) const : string
++operator[](v : const VertexPlace&amp;) : Place&amp;
++operator[](v : const VertexPLace) const : const PLace&amp;
++operator[](v : const EdgePlace) : Gateway_struct&amp;
++operator[](v : const EdgePlace&amp;) const : const Gateway_struct
++print() const : void
++print(v : const VertexPlace&amp;) const : void
++printHighLevel(v : const VertexPlace&amp;) const : void
++removeAllFalseLabel() : void
++removeEdge(e : EdgePlace&amp;) : void
++removeVertex(v : VertexPlace&amp;) : void
++resetLabel() : void
++scale(scale : double ) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5160</x>
+      <y>4830</y>
+      <w>195</w>
+      <h>435</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;270.0;110.0;140.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3165</x>
+      <y>4530</y>
+      <w>45</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1515</x>
+      <y>780</y>
+      <w>1200</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>ComparatorOld
+--
+--
++ComparatorOld(const Map&amp; m, const Map&amp; mm)
+ 
++structuralDifferencies() : int
++countingPlace(corner : int&amp;, rooms : int&amp;, gp : const GraphPlace&amp;) : void
++growHypotheses(const GraphPlace&amp; gp, const GraphPlace&amp; gp2, deque&lt; deque&lt; Match &gt; &gt;&amp; H) : void
++compare(gp : const GraphPlace&amp;, gp2 : const graphPlace&amp;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1575</x>
+      <y>1725</y>
+      <w>480</w>
+      <h>255</h>
+    </coordinates>
+    <panel_attributes>Hypothese
+--
+#_hypothese : deque&lt;Match&gt;
+#_dist : int
+--
++push_back
++pop_back
++push_front
++pop_front
++setDist
++getDist</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1575</x>
+      <y>1365</y>
+      <w>465</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>Match
+--
+_v1 : Vertex
+_v2 : Vertex
+--
++Match(v : Vertex, vv : Vertex)
++getFirst() : const Vertex&amp;
++getSecond() : const Vertex&amp;
++setFirst(const Vertex&amp; v): void
++setSecond(const Vertex&amp; v): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1680</x>
+      <y>1635</y>
+      <w>45</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2040</x>
+      <y>1815</y>
+      <w>195</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2280</x>
+      <y>2115</y>
+      <w>45</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>525</x>
+      <y>1365</y>
+      <w>960</w>
+      <h>615</h>
+    </coordinates>
+    <panel_attributes>Cluster 
+--
+#_cluster : deque&lt;Hypothese&gt;
+#_gp : graphPlace
+#_gp_model : GraphPlace
+--
++Cluster()
++Cluster(h : const deque &lt; Hypothese &gt;&amp;)
+ 
++setGraph(g : const GraphPlace&amp;) : void
++setGraphModel(g : const GraphPlace&amp;) : void
++size() : size_t
++push_back(pair : const comparator::Hypothese&amp;) : void
++push_front(pair : const Hypothese&amp;) : void
++pop_back() : void
++pop_front() : void
++clear() : void
+ 
++getCluster() : deque&lt; Hypothese &gt;&amp;
++isCompatible(hyp_in : const Hypothese&amp;) : bool
++reduce(hyp_in : const Hypothese&amp;) : void
++isSame(hyp_in : const Hypothese&amp;) const : void
++isTheMatch(hyp_in : const Hypothese&amp;, v : VertexPlace, v2 : VrtexPlace) const : bool
+ 
++operator[](const int i) : Hypothese&amp;
++operator[](const int i ) const : const Hypothese&amp;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2205</x>
+      <y>1305</y>
+      <w>1560</w>
+      <h>825</h>
+    </coordinates>
+    <panel_attributes>/ComparatorBase/
+--
+#_map_one : Map
+#_map_model : Map
+#_graph_list_one : topologicalmap::GraphList
+# _graph_place_one : topologicalmap::FilteredGraph
+#_graph_list_model : topologicalmap::GraphList 
+#_graph_place_model : topologicalmap::FilteredGraph  
+#_hypo_final : deque&lt;Hypothese&gt;
+#_num_vertex : int
+#_num_vertex_model : int
+--
++ComparatorBase(const Map&amp; m, const Map&amp; mm)
+ 
++imputMaps(const Map&amp; m, const Map&amp; mm) : void
++inputNewMap(m : const Map&amp;) : void
++inputNewModel(m : const Map&amp;) : void
++drawModelMap(tmp :cv::Mat&amp;) const : void
++getMapModel() : Map&amp;
++getMapModel() const : const Map&amp;
++drawMap(tmp : cv::Mat&amp;) const : void
++getMap() : Mat&amp;
++getMap() const : const Map&amp;
++getResult() const : const deque&lt;Hypothese&gt;&amp;
++thinkALL() : void
++changeModeGraphFusion() : void
++sort(hypothesis : deque&lt; Hypothese&gt;&amp;) : void
++reset() : void
++pairWiseMatch(gp : const Graphplace, gp2 : const GraphPlace, place_pair : deuque&lt;Match&gt;&amp;) : void
++drawHypo(const GraphPlace&amp; gp_real, const GraphPlace&amp; gp_model, const deque&lt; Match &gt;&amp; list_result, const string&amp; name) const : void
++init(gp : const GraphPlace&amp;, gp2 : const GraphPlace&amp;) : void
+/+compare(gp : const GraphPlace&amp;, gp2 : const graphPlace&amp;) : void/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1935</x>
+      <y>390</y>
+      <w>780</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>ComparatorCluster
+--
+--
++ComparatorCluster(const Map&amp; m, const Map&amp; mm)
+ 
++cluster(deque&lt; Hypothese &gt; &amp;) : void
++planarEditDistanceAlgorithm() : bool
++compare(gp : const GraphPlace&amp;, gp2 : const graphPlace&amp;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2520</x>
+      <y>1110</y>
+      <w>45</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2700</x>
+      <y>540</y>
+      <w>195</w>
+      <h>795</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;510.0;110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1470</x>
+      <y>1815</y>
+      <w>135</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5205</x>
+      <y>3705</y>
+      <w>1455</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>StorageFilter
+--
+#_keep_all : boost::keep_all
+#_removed_vertex : std::deque&lt;topologicalmap::VertexPlace&gt;
+#_removed_edges : std::deque&lt;topologicalmap::EdgePlace&gt;
+#_added_edges : std::deque&lt;topologicalmap::EdgesPlace&gt;
+--
++StorageFilter()
++addToRemove(v : const VertexPlace&amp;) : void
++addToRemove(e : const EdgePlace&amp;) : void
++drawAll(str : const string&amp;, fp : const Filtered_place&amp;, gp : const GraphPlace&amp;) : void
++drawSpecialFiltered(fp : const Filtered_place&amp;, m : cv::Mat&amp;) const : void
++drawSpecialFiltered(fp : const Filtered_place&amp;, m : cv::Mat&amp;, c : const VertexPlaceFiltered&amp;, color : const Scalar&amp;) : void
++getAllEdgeLinked(v . const VertexPlace&amp;, fp : const Filtered_place&amp;, all_edge : deque &lt; pair &lt; EdgePlace, VertexPlace &gt; &gt;&amp;) : void
++print() : void
++reduce(h : const deque &lt; VertexPlace&gt;&amp;, gp : GraphPlace&amp;) : void
++removeAllFalseLabel() : void
++reset() : void
++removedVertices(v : const VertexPlace&amp;) : bool
++removedEdges(e : const EdgePlace&amp;) : bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1950</x>
+      <y>0</y>
+      <w>765</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>ComparatorClusterFiltered
+--
+--
++ComparatorCluster(const Map&amp; m, const Map&amp; mm)
+ 
++cluster(deque&lt; Hypothese &gt; &amp;) : void
++planarEditDistanceAlgorithm() : bool
++compare(gp : const GraphPlace&amp;, gp2 : const graphPlace&amp;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3030</x>
+      <y>780</y>
+      <w>1335</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>ComparatorNeighbor
+--
+--
++ComparatorCluster(const Map&amp; m, const Map&amp; mm)
+ 
++cluster(deque&lt; Hypothese &gt; &amp;) : void
++planarEditDistanceAlgorithm() : bool
++compare(gp : const GraphPlace&amp;, gp2 : const graphPlace&amp;) : void
++initPlanar(the_pair : const Match&amp;, starting_seeds : Hypothese&amp;, Q : Hypothese&amp;, seen_before : Hypothese&amp;) : int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2700</x>
+      <y>105</y>
+      <w>270</w>
+      <h>1230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;800.0;160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1860</x>
+      <y>5100</y>
+      <w>735</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>MultipleLineFollower 
+--
+#_dgraphlist : deque &lt; GraphList &gt;
+--
++ḾultipleLineFollower()
++thin() : void
++sort() : void
++isBlack() : bool
++reset() : void
++drawGraph(m : Mat, i : int) : void
++printGraph(i : int) : void
++getGraph(i : int) : const GraphList&amp;
++getgraph(i : int) : GraphList</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2145</x>
+      <y>5010</y>
+      <w>45</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3240</x>
+      <y>1110</y>
+      <w>45</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>4365</x>
+      <y>2580</y>
+      <w>1170</w>
+      <h>930</h>
+    </coordinates>
+    <panel_attributes>Typedef
+
+--
+
+Graph_boost : typedef boost::adjacency_list&lt;
+	boost::listS, boost::listS, boost::undirectedS, 
+	topologicalmap::Intersection_Graph ,
+	EdgeElement,
+	boost::no_property 
+&gt; 
+
+Vertex : boost::graph_traits&lt;GraphList&gt;::vertex_descriptor
+VertexIterator : boost::graph_traits&lt;GraphList&gt;::vertex_iterator
+Edge : boost::graph_traits&lt;GraphList&gt;::edge_descriptor
+EdgeIterator : boost::graph_traits&lt;GraphList&gt;::out_edge_iterator
+
+--
+
+Graph_places : typedef boost::adjacency_list&lt;
+	boost::listS, boost::listS, boost::undirectedS, 
+	topologicalmap::Place,
+	Gateway_struct
+	boost::no_property 
+&gt; 
+
+VertexPlace : boost::graph_traits&lt;Graph_places&gt;::vertex_descriptor
+VertexIteratorPlace : boost::graph_traits&lt;Graph_places&gt;::vertex_iterator
+EdgePlace : boost::graph_traits&lt;Graph_places&gt;::edge_descriptor
+EdgeIteratorPlace : boost::graph_traits&lt;Graph_places&gt;::out_edge_iterator
+
+--
+
+Filtered_place : boost::filtered_graph&lt;Graph_places, boost::keep_all, boost::function&lt;bool(VertexPlace)&gt; &gt; 
+
+VertexIteratorPlaceFiltered : boost::graph_traits&lt; Filtered_place&gt;::vertex_iterator 
+VertexPlaceFiltered : boost::graph_traits&lt; Filtered_place&gt;::vertex_descriptor 
+EdgePlaceFiltered : boost::graph_traits&lt; Filtered_place&gt;::edge_descriptor 
+EdgeIteratorPlaceFiltered : boost::graph_traits&lt; Filtered_place&gt;::out_edge_iterator 
+
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5715</x>
+      <y>2655</y>
+      <w>255</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>EdgeElement
+--
++number : int
+--
++EdgeElelemt()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5715</x>
+      <y>2805</y>
+      <w>255</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>Intersection_Graph
+--
++type : string
++mat : Mat
++point : cv::Point2i
++index : int
++force : int
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5520</x>
+      <y>2700</y>
+      <w>225</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5520</x>
+      <y>2865</y>
+      <w>225</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5520</x>
+      <y>3120</y>
+      <w>225</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5715</x>
+      <y>3300</y>
+      <w>690</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Place
+--
++place : deque &lt; Gateway &gt;
++landmarks : deque &lt; pair &lt; Intersection_Graph, Vertex&gt; &gt;
++junctions : deque &lt; Intersection_Graph, Vertex &gt; &gt; 
++ contour : vector &lt; Point &gt;
++moment : cv::Moments
++mass_center : cv::Point2f
++label : bool
+--
++Place()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5820</x>
+      <y>3195</y>
+      <w>45</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5520</x>
+      <y>3195</y>
+      <w>225</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;120.0;130.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>5955</x>
+      <y>2880</y>
+      <w>210</w>
+      <h>450</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;280.0;120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>438</x>
+      <y>42</y>
+      <w>264</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>/Intersection/
+--
+#_type : std::sting
+#_mat : cv::Mat
+#_point : cv::Point2i
+#new_intersections : std::vector&lt;Intersection*&gt;
+--
++Intersection(m : cv::Mat, p : cv::Point2i)
+/+getType() : std::string/
++getRows() : int
++getCols() : int
++getPoint() : cv::Point2i</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>0</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TCrossing
+--
+--
++Tcrossing()
++getType() : std::string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>72</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>XCrossing
+--
+--
++Tcrossing()
++getType() : std::string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>138</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>NCrossing
+--
+--
++Tcrossing()
++getType() : std::string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>402</x>
+      <y>24</y>
+      <w>48</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>402</x>
+      <y>96</y>
+      <w>48</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>402</x>
+      <y>120</y>
+      <w>48</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>516</x>
+      <y>156</y>
+      <w>132</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>200.0;80.0;200.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>516</x>
+      <y>204</y>
+      <w>312</w>
+      <h>414</h>
+    </coordinates>
+    <panel_attributes>LineFollower
+--
+#_map_in : cv::Mat
+#_map_result : cv::Mat
+#_LP : cv::Point2i
+#_RP : cv::Point2i
+#_LLP : cv::Point2i
+#_LRP : cv::Point2i
+#_W : cv::Mat
+#_d : int
+#_first_ntersection : Intersection*
+#_int_vec : std::vector&lt;Intersection *&gt;
+#_last_drawing_point :cv::Point2i
+#_postprocessing : PostProcessingGraph
+#_value_of_white_min : int
+--
++LineFollower()
++~LineFollower() : void
++addIntersection(i : Intersetion*, dad : Intersection*) : void
++drawGraph(mat : cv::Mat&amp;) : void
++drawLine() : void
++findNextLPRP() : void
++findNextLPRP(all_points : std::vector&lt;cv::Point2i&gt;) : void
++getDynamicWindow() : cv::Mat&amp;
++getFirstIntersection() : Intersection*
++getIntersections() : std::vector&lt;Intersection *&gt;
++getLP() : cv::Point2i&amp;
++getRP() : cv::Point2i&amp;
++getResult() : cv::Mat&amp;
++init() : void
++inputMap(m : const cv::Mat&amp;) : void
++lineThinningAlgo(dad : Intersection*) : void
++moveForward() : void
++printGraph() : void
++removeLineSegment(m : cv::Mat&amp;) : void
++reset() : void
++setD(d : int) : void
++setDynamicWindow(d : cv::Mat&amp;) : void
++setMinValueWhite(v : int) : void
++thin() : void
++typeOfIntersection(m : cv::Mat&amp;) : int
++upResize() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>210</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>BaseNode
+--
+--
++BaseNode()
++getType() : std::string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>402</x>
+      <y>156</y>
+      <w>66</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;130.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>276</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>DeadEnd
+--
+--
++DeadEnd()
++getType() : std::string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>348</y>
+      <w>450</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>PostProcessingGraph
+--
+#_marge : int
+--
++PostProcessingGraph()
++input(first_intersection : Intersection*, int_vec : std:vector&lt;Intersection*&gt;, size : int) : void
++process( first_intersection : Intersection*, int_vec : std:vector&lt;Intersection*&gt;, map : cv::Mat&amp;) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>444</x>
+      <y>384</y>
+      <w>84</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

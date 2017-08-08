@@ -1,0 +1,5 @@
+#install (TARGETS MathFunctions DESTINATION bin)
+install (FILES Map.hpp DESTINATION includes/MapInterpretation)
+install (FILES Robot.hpp DESTINATION includes/MapInterpretation)
+install (FILES Thinker.hpp DESTINATION includes/MapInterpretation)
+install (FILES Thinker_Voronoi.hpp DESTINATION includes/MapInterpretation)
