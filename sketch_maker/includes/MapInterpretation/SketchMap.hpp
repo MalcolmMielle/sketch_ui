@@ -247,6 +247,17 @@ namespace AASS{
 				
 				try{
 					//Scale graph
+					_line_follower.sort();
+					
+// 					for(int i = 0 ; i < _line_follower.size() ; ++i){
+// 						topologicalmap::GraphLine graphl = _line_follower.getGraph(i);
+// 						cv::Mat gl = cv::Mat::zeros(getObstacleMat().size(), CV_8U);
+// 						graphl.draw(gl);
+// 						cv::imshow("gr",gl);
+// 						cv::waitKey(0);
+// 					}
+					
+					
 					topologicalmap::GraphLine gl = _line_follower.getGraph(0);
 					//Scale back if needed.
 					if(_think->getMode() == 4 ){

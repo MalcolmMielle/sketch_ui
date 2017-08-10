@@ -13,6 +13,7 @@ namespace AASS{
 		SketchMap _input;
 		SketchMap _model;
 		cv::Mat _result;
+		cv::Mat _result_graph;
 		AASS::graphmatch::GraphMatcherBase* _comparator;
 		
 	public:
@@ -21,6 +22,7 @@ namespace AASS{
 		void compare(){
 						
 			_input.think();
+			std::cout << "MODEL" << std::endl;
 			_model.think();
 			graphmatch::GraphPlace gp_input = _input.getGraphPlace();
 			graphmatch::GraphPlace gp_model = _model.getGraphPlace(); 
@@ -46,6 +48,15 @@ namespace AASS{
 			_result.release();
 			
 			hypothesis_final_custom[0].drawLinks(gp_input, gp_model, _input.getObstacleMat(), _model.getObstacleMat(), "ALL FINAL CUSTOM", 1, _result);
+			
+			topologicalmap::GraphLine graphl = _input.getLineFollower().getGraph(0);
+			cv::Mat gl = cv::Mat::zeros(_input.getObstacleMat().size(), CV_8U);
+			graphl.draw(gl);
+			topologicalmap::GraphLine graphl2 = _model.getLineFollower().getGraph(0);
+			cv::Mat gl2 = cv::Mat::zeros(_model.getObstacleMat().size(), CV_8U);
+			graphl2.draw(gl2);
+			
+			hypothesis_final_custom[0].drawLinks(gp_input, gp_model, gl, gl2, "ALL FINAL CUSTOM", 1, _result_graph);
 						
 // 			cv::imshow("OBSTres", _result);
 // 			std::cout << "FIN COMPARISON" << std::endl;
@@ -78,6 +89,7 @@ namespace AASS{
 		
 		void exportResult(){
 			cv::imwrite(_path_to_save_result + "/result.jpg", _result);
+			cv::imwrite(_path_to_save_result + "/result_graph.jpg", _result_graph);
 		 	
 		}
 		
