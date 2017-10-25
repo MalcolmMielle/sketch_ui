@@ -51,10 +51,10 @@ namespace AASS{
 			
 			topologicalmap::GraphLine graphl = _input.getLineFollower().getGraph(0);
 			cv::Mat gl = cv::Mat::zeros(_input.getObstacleMat().size(), CV_8U);
-			graphl.draw(gl);
+			gp_input.draw(gl);
 			topologicalmap::GraphLine graphl2 = _model.getLineFollower().getGraph(0);
 			cv::Mat gl2 = cv::Mat::zeros(_model.getObstacleMat().size(), CV_8U);
-			graphl2.draw(gl2);
+			gp_model.draw(gl2);
 			
 			hypothesis_final_custom[0].drawLinks(gp_input, gp_model, gl, gl2, "ALL FINAL CUSTOM", 1, _result_graph);
 						
